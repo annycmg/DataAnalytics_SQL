@@ -30,7 +30,13 @@ CREATE -- Creates a trigger that, before any value is inserted into employee tab
     TRIGGER my_trigger BEFORE INSERT
     ON employee
     FOR EACH ROW BEGIN
-        INSERT INTO trigger_test VALUES('added new employee');
+        IF NEW.sex = 'M' THEN
+               INSERT INTO trigger_test VALUES('added male employee');
+         ELSEIF NEW.sex = 'F' THEN
+               INSERT INTO trigger_test VALUES('added female');
+         ELSE
+               INSERT INTO trigger_test VALUES('added other employee');
+         END IF;
     END$$
 DELIMITER ;
 
