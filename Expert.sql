@@ -22,6 +22,17 @@ sp_rename 'old_procedure_name', 'new_procedure_name'
 
 
 -- TRIGGER: special type of stored procedure that automatically runs when an event occurs in the database.
+CREATE TABLE trigger_test (
+     message VARCHAR(100)
+);
+DELIMITER $$
+CREATE -- Creates a trigger that, before any value is inserted into employee table, a message of `added new employee` is added to trigger_test table.
+    TRIGGER my_trigger BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES('added new employee');
+    END$$
+DELIMITER ;
 
 -- VIEW: is a created subset of a regular query
 CREATE VIEW CustomersView
